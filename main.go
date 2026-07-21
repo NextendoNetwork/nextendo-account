@@ -2701,31 +2701,29 @@ func main() {
 	}
 	srv := &server{store: store}
 
-// Backfill Nintendo IDs for existing accounts that were created before
-// ensureNintendoIDs() was called at creation time. Without this, BaasID
-// is empty in accounts.json and ByBaasNSA() re-derives it on the fly
-// using the current sessionSecret — which changes on every restart unless
-// NEXTENDO_SECRET is set. Real Switch consoles authenticate via baasUserID
-// (stored from the first account-link), so after a secret rotation their
-// baasUserID no longer matches any account → PID "unknown" → error 2124-3121.
-// The emulator is unaffected because it passes the PID directly in the nx2. token.
-if js, ok := store.(*jsonStore); ok {
-    js.mu.Lock()
+	// Backfill Nintendo IDs for existing accounts that were created before
+    // ensureNintendoIDs() was called at creation time. Without this, BaasID
+    // is empty in accounts.json and ByBaasNSA() re-derives it on the fly
+    // using the current sessionSecret — which changes on every restart unless
+    // NEXTENDO_SECRET is set. Real Switch consoles authenticate via baasUserID
+    // (stored from the first account-link), so after a secret rotation their
+    // baasUserID no longer matches any account → PID "unknown" → error 2124-3121.
+    // The emulator is unaffected because it passes the PID directly in the nx2. token.
+    store.mu.Lock()
     changed := 0
-    for _, a := range js.Accts {
+    for _, a := range store.Accts {
         if a.ensureNintendoIDs() {
             changed++
         }
     }
     if changed > 0 {
-        if err := js.persist(); err != nil {
+        if err := store.persist(); err != nil {
             log.Printf("[startup] backfill Nintendo IDs: persist error: %v", err)
         } else {
             log.Printf("[startup] backfill: persisted Nintendo IDs for %d account(s)", changed)
         }
     }
-    js.mu.Unlock()
-}
+    store.mu.Unlock()
 
 	sessionsPath := os.Getenv("NEXTENDO_SESSIONS")
 	if sessionsPath == "" {
