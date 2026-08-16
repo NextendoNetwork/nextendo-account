@@ -25,6 +25,7 @@ var titlesByAccessKey = map[string][]string{
 	"09c1c475": {"0100152000022000"},                                         // Mario Kart 8 Deluxe
 	"4eb18d39": {"0100f8f0000a2000", "01003bc0000a0000", "01003c700009c800"}, // Splatoon 2 (EU/US/JP)
 	"9587602b": {"01006a800016e000"},                                         // Super Smash Bros. Ultimate
+	"b6b34c51": {"01009b500007c000"},                                         // ARMS
 	"v43a10em": {"01006f8002326000"},                                         // Animal Crossing: New Horizons
 }
 
