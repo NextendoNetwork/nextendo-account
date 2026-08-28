@@ -743,8 +743,9 @@ func genFriendCode() string {
 	}
 }
 
+// DESPUÉS (Permite alfanuméricos ASCII, guiones, Hiragana y Katakana):
 var (
-	reUser  = regexp.MustCompile(`^[A-Za-z0-9_\-]{3,16}$`)
+	reUser  = regexp.MustCompile(`^[A-Za-z0-9_\-\p{Hiragana}\p{Katakana}]{3,16}$`)
 	reEmail = regexp.MustCompile(`^[^@\s]+@[^@\s]+\.[^@\s]+$`)
 	reDigit = regexp.MustCompile(`[0-9]`)
 )
