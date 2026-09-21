@@ -44,6 +44,9 @@ func gameStatsURLs() []string {
 		env("DASH_S2_URL", "http://s2nex:8083"),
 		env("DASH_SSBU_URL", "http://ssbusecure:8084"),
 		env("DASH_ACNH_URL", "http://acnhnex-nexgo:8086"),
+		// Without this the count ignores Mario Party Superstars, and an MPS session never
+		// takes the account's online slot, so the same account can be online in two games.
+		env("DASH_MPS_URL", "http://mps:8103"),
 	}
 }
 
