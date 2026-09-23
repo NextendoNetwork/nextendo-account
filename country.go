@@ -88,6 +88,12 @@ func (s *jsonStore) SetCountry(id int64, code string) (*Account, error) {
 // country sert la liste des codes (GET, public) et enregistre le choix du
 // joueur (POST, authentifié).
 func (s *server) country(w http.ResponseWriter, r *http.Request) {
+	r.Body = http.MaxBytesReader(w, r.Body, 1024) // limit of 1kb
+	// error out if too large
+	if err := r.Body.Close(); err != nil {
+		writeErr(w, http.StatusBadRequest, "Corps de requête trop volumineux")
+		return
+	}
 	switch r.Method {
 	case http.MethodGet:
 		// Public : la page d'inscription en a besoin avant tout compte.
