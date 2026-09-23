@@ -2799,6 +2799,27 @@ func (s *server) internalPIDByBsDid(w http.ResponseWriter, r *http.Request) {
 	writeErr(w, http.StatusNotFound, "bs:did inconnu")
 }
 
+// internalPIDByNexToken proves an nx2 token (the emulator's nnex claim) for callers without NEXTENDO_SECRET.
+func (s *server) internalPIDByNexToken(w http.ResponseWriter, r *http.Request) {
+	var in struct {
+		Token string `json:"token"`
+	}
+	if r.Method != http.MethodPost || json.NewDecoder(r.Body).Decode(&in) != nil {
+		writeErr(w, http.StatusBadRequest, "requête invalide")
+		return
+	}
+	pid, ok := verifyNexToken(in.Token)
+	if !ok {
+		writeErr(w, http.StatusUnauthorized, "jeton nex invalide")
+		return
+	}
+	if _, err := s.store.ByPID(pid); err != nil {
+		writeErr(w, http.StatusNotFound, "compte introuvable")
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"pid": pid})
+}
+
 // internalLogin (INTERNAL) validates Nextendo credentials and returns the same
 // identity payload as /internal/identity. nx-account's account-link login page
 // posts here so the user signs into THEIR Nextendo account on the console.
@@ -3023,6 +3044,7 @@ func main() {
 	mux.HandleFunc("/internal/npln-friends", internalOnly("/internal/npln-friends", srv.internalNplnFriends))       // npln-s3 (S3/NPLN) reads the unified Nextendo friend graph
 	mux.HandleFunc("/internal/identity", internalOnly("/internal/identity", srv.internalIdentity))                  // nx-account pulls the Nextendo identity for a real CFW Switch
 	mux.HandleFunc("/internal/pid-by-bsdid", internalOnly("/internal/pid-by-bsdid", srv.internalPIDByBsDid))        // nx-account résout le bs:did d'une requête -> compte (identité par requête)
+	mux.HandleFunc("/internal/pid-by-nex-token", internalOnly("/internal/pid-by-nex-token", srv.internalPIDByNexToken))
 	mux.HandleFunc("/internal/login", internalOnly("/internal/login", srv.internalLogin))                           // nx-account's account-link page validates Nextendo credentials here
 	mux.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) { writeJSON(w, 200, map[string]any{"ok": true}) })
 
