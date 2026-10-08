@@ -62,6 +62,8 @@ type Account struct {
 	// vérité : le gate online peut l'exiger, et un ban depuis le site sait qui bannir sur Discord.
 	DiscordID       string    `json:"discord_id,omitempty"`
 	IsBooster       bool      `json:"is_booster,omitempty"`
+	// Premier don encaisse (Stripe, voir dons.go), en millisecondes. Zero = pas donateur. Jamais remis a zero.
+	DonorSinceMs    int64     `json:"donor_since_ms,omitempty"`
 	DiscordUsername string    `json:"discord_username,omitempty"`
 	DiscordLinkedAt time.Time `json:"discord_linked_at,omitempty"`
 	// Downgrade booster→non-booster en dépassement : échéance (now+3j) affichée dans l'espace perso
@@ -120,6 +122,7 @@ func (a *Account) Public() map[string]any {
 		// Booster du serveur Discord (poussé par le bot) : débloque le cloud-save tous-jeux et le
 		// badge « MEMBRE BOOSTER » rose sur l'espace perso.
 		"isBooster": a.IsBooster,
+		"isDonor":   a.DonorSinceMs > 0,
 		// Player country (ISO alpha-2); empty until they pick one.
 		"country": a.Country,
 	}
@@ -2973,6 +2976,10 @@ func main() {
 	mux.HandleFunc("/api/online-counts", srv.onlineCounts)                                            // l'émulateur : joueurs en ligne par jeu (liste des jeux)
 	mux.HandleFunc("/api/site-config", srv.siteConfig)                                                // état public du site (inscriptions ouvertes/fermées)
 	mux.HandleFunc("/api/report", srv.report)                                                         // l'emulateur : signaler un bug (jeton joueur)
+	mux.HandleFunc("/api/stripe/webhook", srv.stripeWebhook) // Stripe : don encaisse (appel signe, voir dons.go)
+	mux.HandleFunc("/api/donations/goal", srv.donGoal)     // public : total des dons du mois et objectif
+	mux.HandleFunc("/api/admin/donors", srv.adminDonors)     // bot : comptes donateurs relies a Discord (role)
+	mux.HandleFunc("/api/admin/donor", srv.adminSetDonor)   // admin : badge donateur donne a la main (?pid=)
 	mux.HandleFunc("/api/admin/reports", srv.adminReports)                                            // admin : boite de reception des signalements
 	mux.HandleFunc("/api/admin/check", srv.adminCheck)                                                // le front : suis-je admin ?
 	mux.HandleFunc("/api/admin/users", srv.adminUsers)                                                // admin : liste des utilisateurs + activité
