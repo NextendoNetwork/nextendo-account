@@ -150,7 +150,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#e8a33d", Metacritic: 88,
 	},
 	"010051f0207b2000": {
-		Name:        "Tomodachi Life : Une vie de rêve",
+		Name:        "Tomodachi Life: Living the Dream",
 		Tagline:     "Vos Mii vivent leur vie. Vous regardez, un peu inquiet.",
 		Description: "Une simulation de vie loufoque où vos Mii habitent une île, se lient d'amitié, se disputent, tombent amoureux et font des rêves absurdes. Vous n'êtes pas vraiment aux commandes : vous observez, vous nourrissez, vous provoquez le chaos.",
 		Genres:      []string{"Simulation de vie", "Bac à sable"},
@@ -180,7 +180,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#c9a227", Metacritic: 96,
 	},
 	"0100f43008c44000": {
-		Name:        "Légendes Pokémon : Z-A",
+		Name:        "Pokémon Legends: Z-A",
 		Tagline:     "Illumis se réinvente — et les combats passent en temps réel.",
 		Description: "Un opus Légendes entièrement situé dans la ville d'Illumis, en pleine refonte urbaine. Les affrontements abandonnent le tour par tour strict au profit de combats en temps réel où le placement compte autant que le choix des attaques.",
 		Genres:      []string{"RPG", "Aventure"},
@@ -250,7 +250,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#5d8c3f",
 	},
 	"0100abf008968000": {
-		Name:        "Pokémon Épée",
+		Name:        "Pokémon Sword",
 		Tagline:     "Galar, les arènes et les Pokémon Dynamax géants.",
 		Description: "Le premier Pokémon principal sur Switch, situé dans la région de Galar inspirée du Royaume-Uni. Les combats d'arène se déroulent en stade devant une foule, avec le phénomène Dynamax qui fait enfler les Pokémon le temps de trois tours.",
 		Genres:      []string{"RPG", "Aventure"},
@@ -260,7 +260,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#2f7fc1", Metacritic: 80,
 	},
 	"01001f5010dfa000": {
-		Name:        "Légendes Pokémon : Arceus",
+		Name:        "Pokémon Legends: Arceus",
 		Tagline:     "Hisui, avant les dresseurs : on lance la Ball soi-même.",
 		Description: "Un Pokémon d'action situé dans le Hisui d'autrefois, l'ancienne région de Sinnoh. On observe, on se faufile et on lance ses Balls en temps réel dans de vastes zones ouvertes, pour constituer le tout premier Pokédex.",
 		Genres:      []string{"RPG", "Action-aventure"},
@@ -270,7 +270,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#c6a15b", Metacritic: 83,
 	},
 	"010003f003a34000": {
-		Name:        "Pokémon : Let's Go, Pikachu !",
+		Name:        "Pokémon : Let's Go, Pikachu!",
 		Tagline:     "Kanto revisité, avec Pikachu sur l'épaule.",
 		Description: "Une relecture de Pokémon Jaune pensée pour les nouveaux venus : la capture reprend le geste de Pokémon GO, Pikachu vous suit partout, et un second joueur peut rejoindre l'aventure à tout moment.",
 		Genres:      []string{"RPG", "Aventure"},
@@ -310,7 +310,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#2e9bb5", Metacritic: 97,
 	},
 	"01004d300c5ae000": {
-		Name:        "Kirby et le Monde oublié",
+		Name:        "Kirby and the Forgotten Land",
 		Tagline:     "Kirby passe à la 3D — et avale carrément une voiture.",
 		Description: "La première aventure principale de Kirby en 3D, dans un monde envahi par la nature. Le Transformorphe lui permet d'engloutir des objets entiers — voiture, distributeur, escalier — pour en tirer des capacités inattendues.",
 		Genres:      []string{"Plateforme 3D", "Action"},
@@ -320,7 +320,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#f28aa8", Metacritic: 85,
 	},
 	"01006d0017f7a000": {
-		Name:        "Mario & Luigi : L'épopée fraternelle",
+		Name:        "Mario & Luigi: Brothership",
 		Tagline:     "Deux frères, un archipel à recoller.",
 		Description: "Le retour du RPG Mario & Luigi : les deux frères naviguent entre les îles d'un archipel à reconnecter. Les combats gardent le timing d'action de la série — chaque coup porté ou esquivé dépend d'une pression de bouton bien placée.",
 		Genres:      []string{"RPG", "Aventure"},
