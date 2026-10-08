@@ -270,7 +270,7 @@ var gamesDB = map[string]gameCard{
 		Accent:      "#c6a15b", Metacritic: 83,
 	},
 	"010003f003a34000": {
-		Name:        "Pokémon : Let's Go, Pikachu!",
+		Name:        "Pokémon: Let's Go, Pikachu!",
 		Tagline:     "Kanto revisité, avec Pikachu sur l'épaule.",
 		Description: "Une relecture de Pokémon Jaune pensée pour les nouveaux venus : la capture reprend le geste de Pokémon GO, Pikachu vous suit partout, et un second joueur peut rejoindre l'aventure à tout moment.",
 		Genres:      []string{"RPG", "Aventure"},
